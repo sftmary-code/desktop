@@ -308,6 +308,9 @@ const imageDiffTypeKey = 'image-diff-type'
 const hideWhitespaceInDiffDefault = false
 const hideWhitespaceInDiffKey = 'hide-whitespace-in-diff'
 
+const showSideBySideDiffDefault = false
+const showSideBySideDiffKey = 'show-sidebyside-diff'
+
 const shellKey = 'shell'
 
 // background fetching should occur hourly when Desktop is active, but this
@@ -381,6 +384,7 @@ export class AppStore extends TypedBaseStore<IAppState> {
   private askForConfirmationOnForcePush = askForConfirmationOnForcePushDefault
   private imageDiffType: ImageDiffType = imageDiffTypeDefault
   private hideWhitespaceInDiff: boolean = hideWhitespaceInDiffDefault
+  private showSideBySideDiff: boolean = showSideBySideDiffDefault
 
   private uncommittedChangesStrategyKind: UncommittedChangesStrategyKind = uncommittedChangesStrategyKindDefault
 
@@ -723,6 +727,7 @@ export class AppStore extends TypedBaseStore<IAppState> {
       selectedExternalEditor: this.selectedExternalEditor,
       imageDiffType: this.imageDiffType,
       hideWhitespaceInDiff: this.hideWhitespaceInDiff,
+      showSideBySideDiff: this.showSideBySideDiff,
       selectedShell: this.selectedShell,
       repositoryFilterText: this.repositoryFilterText,
       resolvedExternalEditor: this.resolvedExternalEditor,
@@ -1802,6 +1807,7 @@ export class AppStore extends TypedBaseStore<IAppState> {
         : parseInt(imageDiffTypeValue)
 
     this.hideWhitespaceInDiff = getBoolean(hideWhitespaceInDiffKey, false)
+    this.showSideBySideDiff = getBoolean(showSideBySideDiffKey, false)
 
     this.automaticallySwitchTheme = getAutoSwitchPersistedTheme()
 
@@ -4666,6 +4672,13 @@ export class AppStore extends TypedBaseStore<IAppState> {
     } else {
       return this._changeFileSelection(repository, file)
     }
+  }
+
+  public _setShowSideBySideDiff(showSideBySideDiff: boolean) {
+    setBoolean(showSideBySideDiffKey, showSideBySideDiff)
+    this.showSideBySideDiff = showSideBySideDiff
+
+    this.emitUpdate()
   }
 
   public _setUpdateBannerVisibility(visibility: boolean) {

@@ -2603,6 +2603,7 @@ export class App extends React.Component<IAppProps, IAppState> {
           onViewCommitOnGitHub={this.onViewCommitOnGitHub}
           imageDiffType={state.imageDiffType}
           hideWhitespaceInDiff={state.hideWhitespaceInDiff}
+          showSideBySideDiff={state.showSideBySideDiff}
           focusCommitMessage={state.focusCommitMessage}
           askForConfirmationOnDiscardChanges={
             state.askForConfirmationOnDiscardChanges
